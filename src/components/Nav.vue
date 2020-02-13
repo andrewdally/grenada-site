@@ -31,16 +31,16 @@
         <div class="uk-panel">
             <ul class="uk-nav uk-nav-default tm-nav">
               <li v-bind:class="isActive('about')">
-                <router-link to="/about">About</router-link>
+                <router-link class="uk-offcanvas-close" to="/about">About</router-link>
               </li>
               <li v-bind:class="isActive('team')">
-                <router-link to="/team">Team</router-link>
+                <router-link class="uk-offcanvas-close" to="/team">Team</router-link>
               </li>
               <li v-bind:class="isActive('projects')">
-                <router-link to="/projects">Projects</router-link>
+                <router-link class="uk-offcanvas-close" to="/projects">Projects</router-link>
               </li>
               <li v-bind:class="isActive('dash')">
-                <router-link to="/dash">Dash</router-link>
+                <router-link class="uk-offcanvas-close" to="/dash">Dash</router-link>
               </li>
             </ul>
         </div>
@@ -95,18 +95,16 @@ export default {
   }
   .uk-navbar-nav>li>a {
     letter-spacing: 1.5px;
-    border-bottom: 0px solid white;
+    border-bottom: 5px solid transparent;
     padding-bottom: 5px;
-    transition: border-width .3s, padding-bottom .3s;
+    transition: border-color .3s;
   }
   .uk-navbar-nav>li>a, .uk-logo, .uk-navbar-toggle {
     color: white !important;
-    text-shadow: 0px 0px 10px rgba(0,0,0,0.75);
   }
   .uk-navbar-nav>li>a:hover {
     color: white;
-    border-width: 5px;
-    padding-bottom: 0;
+    border-color: white;
   }
   .uk-navbar-nav>li.uk-active>a{
     color: #666 !important;
@@ -135,7 +133,7 @@ export default {
     margin: 0;
   }
   .uk-logo {
-    font-family: 'Univers', sans-serif;
+    font-family: 'Suisse', sans-serif;
     font-weight: 300;
     color: white;
   }
@@ -162,8 +160,14 @@ export default {
   }
   #offcanvas .uk-nav-default>li>a {
     color:white;
-    font-family: 'Univers';
+    font-family: 'Suisse';
     font-size: 22px;
     text-transform: uppercase;
+  }
+  .uk-offcanvas-close {
+    position: relative;
+    z-index: inherit;
+    top: 0;
+    right: 0;
   }
 </style>

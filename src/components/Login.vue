@@ -1,5 +1,5 @@
 <template>
-  <div class="uk-section uk-margin-auto" style="max-width: 640px;">
+  <div class="uk-section uk-margin-auto uk-height-viewport" style="max-width: 640px;">
     <h2>Login</h2>
     <form>
       <fieldset class="uk-fieldset">

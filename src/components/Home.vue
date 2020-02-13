@@ -1,11 +1,13 @@
 <template>
   <div>
-    <div uk-sticky id="hero" class="uk-height-viewport uk-background-cover uk-light uk-flex uk-flex-middle" v-bind:style="{ backgroundImage: `url(${background})`}">
-      <h1 class="uk-text-center" uk-parallax="blur: 25;">Climate Smart Cities <span>Grenada</span></h1>
+    <div uk-sticky id="hero" class="uk-height-viewport uk-background-cover uk-light" v-bind:style="{ backgroundImage: `url(${background})`}">
+      <div class="overlay uk-flex uk-flex-middle">
+        <h1 class="uk-text-center" uk-parallax="blur: 25;">Climate Smart Cities <span>Grenada</span></h1>
+      </div>
     </div>
     <section class="uk-section-default uk-height-viewport uk-width-viewport uk-inline uk-padding-large"  uk-parallax="opacity: 0,1; viewport: 0.1;">
       <p class="uk-position-center uk-text-center uk-text-lead uk-text-half" uk-parallax="opacity: 0,1; viewport: 0.35; blur: 2,0">
-        The Government of Grenada and the Marron Institute of Urban Management have partnered to support Grenada's efforts to become a role model in climate change adaptation and resilience.
+        A small island in the middle of the ocean in a hurricane zone is inherently one of the most vulnerable places on earth. The Government of Grenada and the Marron Institute of Urban Management have partnered to support Grenada's efforts to become a role model in climate change adaptation and resilience.
       </p>
     </section>
     <section class="uk-section-default uk-width-viewport uk-inline uk-padding-large">
@@ -90,12 +92,11 @@ export default {
 
 <style scoped>
 h1 {
-  font-family: 'Univers', sans-serif;
+  font-family: 'Suisse', sans-serif;
   font-size: 64px;
   font-size: 8vw;
   font-weight: 300;
   margin: 120px auto;
-  text-shadow: 0px 0px 10px rgba(0,0,0,0.75);
 }
 h1 span {
   text-transform: uppercase;
@@ -103,6 +104,9 @@ h1 span {
 }
 #hero {
   z-index: -1;
+}
+#hero .overlay {
+  height: 100vh;
 }
 .uk-text-half {
   width: 50%;

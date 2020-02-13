@@ -56,6 +56,7 @@ export default {
         }
       },
       result(result) {
+        console.log(this.source)
         this.source = result.data.project.body
       }
     }

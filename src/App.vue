@@ -4,16 +4,18 @@
     <div v-bind:class="bodyClass()">
       <router-view></router-view>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
 import Nav from '@/components/Nav'
+import Footer from '@/components/Footer'
 export default {
   name: 'app',
   components: {
     Nav,
-    // Home
+    Footer
   },
   methods: {
     bodyClass() {
@@ -27,29 +29,21 @@ export default {
 
 <style>
 @font-face {
-  font-family: 'Univers';
-  src: url('./assets/fonts/UniversLTPro-55Roman.otf');
-  src: url('./assets/fonts/UniversLTPro-55Roman.ttf') format('truetype'),
-       url('./assets/fonts/UniversLTPro-55Roman.woff') format('woff'),
-       url('./assets/fonts/UniversLTPro-55Roman.woff2') format('woff2');
+  font-family: 'Suisse';
+  src: url('./assets/fonts/SuisseIntl-Regular.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Univers';
-  src: url('./assets/fonts/UniversLTPro-65Bold.otf');
-  src: url('./assets/fonts/UniversLTPro-65Bold.eot');
-  src: url('./assets/fonts/UniversLTPro-65Bold.eot?#iefix') format('embedded-opentype'),
-       url('./assets/fonts/UniversLTPro-65Bold.ttf') format('truetype'),
-       url('./assets/fonts/UniversLTPro-65Bold.woff') format('woff'),
-       url('./assets/fonts/UniversLTPro-65Bold.woff2') format('woff2');
+  font-family: 'Suisse';
+  src: url('./assets/fonts/SuisseIntl-SemiBold.woff2') format('woff2'); 
   font-weight: 700;
   font-style: 700;
 }
 
 
 #app {
-  font-family: 'Univers', Helvetica, Arial, sans-serif;
+  font-family: 'Suisse', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
@@ -61,10 +55,10 @@ a {
   padding-top: 60px;
 }
 h2,h3,h4 {
-  font-family: 'Univers', sans-serif;
+  font-family: 'Suisse', sans-serif;
 }
 h2 {
-  font-family: 'Univers', Helvetica, sans-serif;
+  font-family: 'Suisse', Helvetica, sans-serif;
   font-weight: bold;
   font-size: 52px;
   line-height: 62px;
@@ -74,6 +68,11 @@ h2 {
 }
 .slender-container {
   max-width: 640px;
+}
+.overlay {
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.25);
 }
 </style>
 Celadon Green
