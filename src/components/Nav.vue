@@ -94,39 +94,45 @@ export default {
     padding-right: 0;
   }
   .uk-navbar-nav>li>a {
-    border-bottom: 4px solid transparent;
-    transition: border-color .5s;
-    font-size: 15px;
+    letter-spacing: 1.5px;
+    border-bottom: 0px solid white;
+    padding-bottom: 5px;
+    transition: border-width .3s, padding-bottom .3s;
+  }
+  .uk-navbar-nav>li>a, .uk-logo, .uk-navbar-toggle {
+    color: white !important;
+    text-shadow: 0px 0px 10px rgba(0,0,0,0.75);
   }
   .uk-navbar-nav>li>a:hover {
     color: white;
-    border-color: white;
+    border-width: 5px;
+    padding-bottom: 0;
   }
   .uk-navbar-nav>li.uk-active>a{
-    color: #666;
+    color: #666 !important;
     border-color: #666;
-  }
-  .uk-navbar-nav>li>a, .uk-logo, .uk-navbar-toggle {
-    color: white;
-    text-shadow: 0px 0px 10px rgba(0,0,0,0.75);
+    border-width: 5px;
+    padding-bottom: 0;
   }
   .uk-logo {
     font-size: 28px;
   }
   .members-button {
-    font-size: 15px;
+    letter-spacing: 1.5px;
     border-radius: 75px;
     color: white;
     border-color: white;
-    transition: border-radius .5s;
+    transition: border-radius .5s, border .5s, margin .5s;
     background-color: rgba(0,0,0,0.05);
+    margin: 0 4px;
   }
   .members-button:hover {
     color: white;
     border-color: white;
     border-radius: 0px;
     background-color: rgba(0,0,0,0.05);
-
+    border: 5px solid white;
+    margin: 0;
   }
   .uk-logo {
     font-family: 'Univers', sans-serif;

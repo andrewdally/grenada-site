@@ -53,7 +53,10 @@ let router = new Router({
         requires_auth: true
       }
     }
-  ]
+  ],
+    scrollBehavior() {
+        return {x: 0, y: 0}
+    }
 });
 
 router.beforeEach((to, from, next) => {

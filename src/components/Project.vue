@@ -1,10 +1,12 @@
 <template>
   <div class="uk-container">
-    <section>
-      <h2>{{project.title}}</h2>
-      <img v-bind:src="imageUrl(project)" alt="">
-      <div>
-        {{project.body}}
+    <section class="uk-section">
+      <h2 class="uk-margin-large-bottom">{{project.title}}</h2>
+      <div class="uk-margin-auto" style="max-width: 640px;">
+        <img v-bind:src="imageUrl(project)" alt="">
+        <vue-markdown>
+          {{project.body}}
+        </vue-markdown>
       </div>
     </section>
   </div>
@@ -12,25 +14,24 @@
 
 <script>
 import gql from 'graphql-tag'
-
+import VueMarkdown from 'vue-markdown'
 export default {
   data: function () {
     return {
-      project: []
+      project: [],
+      source: ''
     }
+  },
+  components: {
+    VueMarkdown
   },
   methods: {
       imageUrl: function (project) {
+        console.log('project', project)
         return project.cover && project.cover.url
       },
       proposalLink: function (project) {
-        return project.proposal ? 'http://localhost:1337' + project.proposal.url : ''
-      },
-      // Refactor into util function. See Home.vue
-      firstSentences: function (project) {
-        let sentences = project.body.split('. ')
-        let firstTwo = sentences.slice(0, 2)
-        return firstTwo.join('. ')
+        return project.proposal && project.proposal.url
       }
   },
   apollo: {
@@ -53,6 +54,9 @@ export default {
         return {
           projectId: this.$route.params.project_id
         }
+      },
+      result(result) {
+        this.source = result.data.project.body
       }
     }
   }

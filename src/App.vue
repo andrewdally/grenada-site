@@ -63,6 +63,18 @@ a {
 h2,h3,h4 {
   font-family: 'Univers', sans-serif;
 }
+h2 {
+  font-family: 'Univers', Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 52px;
+  line-height: 62px;
+  text-align: center;
+  border-bottom: 1px solid black;
+  text-transform: uppercase;
+}
+.slender-container {
+  max-width: 640px;
+}
 </style>
 Celadon Green
 #358277

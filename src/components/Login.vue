@@ -1,22 +1,34 @@
 <template>
-  <div>
-    <h4>Login</h4>
+  <div class="uk-section uk-margin-auto" style="max-width: 640px;">
+    <h2>Login</h2>
     <form>
-      <label for="email">E-Mail Address</label>
-      <div>
-        <input id="email" type="email" v-model="email" required autofocus />
-      </div>
-      <div>
-        <label for="password">Password</label>
-        <div>
-          <input id="password" type="password" v-model="password" required />
+      <fieldset class="uk-fieldset">
+        <div class="uk-margin">
+          <input
+            id="email"
+            type="email"
+            placeholder="Username"
+            class="uk-input uk-form-large"
+            v-model="email" required autofocus
+          />
         </div>
-      </div>
-      <div>
-        <button type="submit" @click="handleSubmit">
-          Login
-        </button>
-      </div>
+        <div class="uk-margin">
+          <div>
+            <input
+              id="password"
+              type="password"
+              placeholder="Password"
+              class="uk-input uk-form-large"
+              v-model="password" required
+            />
+          </div>
+        </div>
+        <div class="uk-margin">
+          <button class="uk-button uk-button-default uk-width-1-1" type="submit" @click="handleSubmit">
+            Login
+          </button>
+        </div>
+      </fieldset>
     </form>
   </div>
 </template>
