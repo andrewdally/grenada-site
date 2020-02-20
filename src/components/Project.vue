@@ -3,10 +3,8 @@
     <section class="uk-section">
       <h2 class="uk-margin-large-bottom">{{project.title}}</h2>
       <div class="uk-margin-auto" style="max-width: 640px;">
-        <img v-bind:src="imageUrl(project)" alt="">
-        <vue-markdown>
-          {{project.body}}
-        </vue-markdown>
+        <img class="uk-margin-bottom" v-bind:src="imageUrl(project)" alt="">
+        <vue-markdown :source="source"></vue-markdown>
       </div>
     </section>
   </div>
@@ -56,7 +54,8 @@ export default {
         }
       },
       result(result) {
-        console.log(this.source)
+        console.log('source', this.source)
+        this.project = result.data.project
         this.source = result.data.project.body
       }
     }

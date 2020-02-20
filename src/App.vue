@@ -36,23 +36,25 @@ export default {
 }
 @font-face {
   font-family: 'Suisse';
-  src: url('./assets/fonts/SuisseIntl-SemiBold.woff2') format('woff2'); 
+  src: url('./assets/fonts/SuisseIntl-SemiBold.woff2') format('woff2');
   font-weight: 700;
   font-style: 700;
 }
-
-
 #app {
   font-family: 'Suisse', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 a {
   color: #358277;
 }
 .page-body{
   padding-top: 60px;
+  flex: 1;
 }
 h2,h3,h4 {
   font-family: 'Suisse', sans-serif;
