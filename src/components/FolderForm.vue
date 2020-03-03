@@ -1,9 +1,8 @@
 <template>
-  <div id="modal-example" uk-modal>
+  <div id="folder-modal" uk-modal>
     <div class="uk-modal-dialog uk-modal-body">
       <form>
         <fieldset class="uk-fieldset">
-          <div>{{parentFolder}}</div>
           <legend class="uk-legend">New Folder</legend>
           <div class="uk-margin">
             <input v-model="folderName" class="uk-input" type="text" placeholder="Folder name">
@@ -31,7 +30,6 @@ export default {
       const newFolder = this.folderName
       const parentFolder = this.parentFolder
 
-
       this.$apollo.mutate({
         mutation: gql`mutation folderCreate ($title: String!, $parent_folder: ID!) {
           createFolder(input: {
@@ -52,6 +50,9 @@ export default {
           title: newFolder,
           parent_folder: parentFolder
         }
+      }).then((result) => {
+        this.$emit('add-folder', result.data.createFolder.folder)
+        window.UIkit.modal('#folder-modal').hide()
       })
     }
   }

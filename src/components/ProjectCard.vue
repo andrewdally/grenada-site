@@ -9,9 +9,16 @@
         <h3>{{project.title}}</h3>
       </div>
     </a>
-    <p class="description uk-text-center">
-      {{snippet(project)}}
-    </p>
+    <div v-if="$route.name == 'projects'" class="uk-flex">
+      <a class="uk-text-small uk-text-secondary" :href="'/projects/' + project.id">[Read more]</a>
+      <a v-if="project.proposal" class="uk-text-small uk-text-secondary pdf-link" :href="project.proposal.url" target="_blank">[Download PDF]</a>
+    </div>
+    <div class="uk-margin-small-top" v-else>
+      <p class="description uk-width-3-4@s uk-margin-auto@s uk-text-center@s">
+        {{snippet(project)}}
+      </p>
+    </div>
+
   </div>
 </template>
 
@@ -21,6 +28,7 @@ export default {
   props: ['project'],
   methods: {
     coverImage (object) {
+      console.log(object)
       return object.cover && object.cover.url
     },
     snippet (object) {
@@ -51,8 +59,8 @@ h2 {
 .uk-grid .overlay>h3 {
   font-size: 36px;
 }
-.description {
-  padding: 15px 90px;
+.pdf-link {
+  margin-left: auto;
 }
 .uk-grid .description {
   padding: 10px;

@@ -8,7 +8,7 @@
           </div>
           <div class="uk-width-expand">
             <h3 class="uk-card-title uk-margin-remove-bottom">{{member.name}}</h3>
-            <p class="uk-text-meta uk-margin-remove-top">{{member.title}}</p>
+            <p class="uk-text-small uk-margin-remove-top">{{member.title}}</p>
           </div>
         </div>
       </div>

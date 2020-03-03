@@ -1,62 +1,60 @@
 <template>
   <div>
-    <ul class="uk-breadcrumb">
-      <li v-if="folderTree.length === 0">
-        <span>Home</span>
-      </li>
-      <li v-else>
-        <a v-on:click="editTree(-1)">Home</a>
-      </li>
-      <template v-for="(folder, index) in folderTree">
-        <li v-if="isLastFolder(folder)" v-bind:key="folder.id">
-          <span>{{folder.title}}</span>
-        </li>
-        <li v-else v-bind:key="folder.id">
-          <a v-on:click="editTree(index)">
-            {{folder.title}}
-          </a>
-        </li>
-      </template>
-    </ul>
-    <table class="uk-table uk-table-divider">
-      <tr v-for="item in contents" v-bind:key="item.__typename + item.id">
-        <td v-if="item.__typename === 'Document'">
-          <span uk-icon="icon: file-pdf; ratio: 1"></span>
-          <a v-bind:href="documentDownload(item)" target="_blank">
-            {{documentName(item)}}
-          </a>
-        </td>
-        <td v-else>
-          <span uk-icon="icon: folder; ratio: 1"></span>
-          <a v-on:click="itemClick(item)">
-            {{item.title}}
-          </a>
-        </td>
-      </tr>
-    </table>
-    <a href="#modal-example" uk-toggle>Open</a>
-    <folder-form v-bind:parentFolder="currentFolder"/>
+    <div class="uk-container uk-flex uk-align-middle">
+      <div class="uk-navbar-left">
+        <ul class="uk-breadcrumb">
+          <li v-if="folderTree.length === 0">
+            <span>Home</span>
+          </li>
+          <li v-else>
+            <a v-on:click="downTree(-1)">Home</a>
+          </li>
+          <li v-for="(folder, index) in folderTree" v-bind:key="folder.id">
+            <span v-if="isLastFolder(folder)">{{folder.title}}</span>
+            <a v-else @click="downTree(index)">{{folder.title}}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="uk-navbar-right">
+        <a @click="logout" class="uk-button uk-button-text uk-margin-medium-right">Logout</a>
+      </div>
+    </div>
+    <div class="uk-container">
+      <div>
+        <folder-contents
+          :contents="contents"
+          @folder-click="climbTree"
+          @item-delete="itemDelete"
+        />
+        <template v-if="adminOrPartner()">
+          <p uk-margin>
+            <a class="uk-button uk-button-default" href="#folder-modal" uk-toggle>Add folder</a>
+            <a class="uk-button uk-button-default uk-margin-small-left" href="#upload-modal" uk-toggle>Add files</a>
+          </p>
+          <folder-form @add-folder="addItem" v-bind:parentFolder="currentFolder"/>
+          <uploader-form @add-document="addItem" v-bind:parentFolder="currentFolder"/>
+        </template>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import gql from 'graphql-tag'
+import FolderContents from './FolderContents'
 import FolderForm from './FolderForm'
+import UploaderForm from './UploaderForm'
+
 export default {
   data () {
     return {
       folder: {},
       initialFolder: 1,
-      folderTree: []
+      folderTree: [],
+      contents: []
     }
   },
   computed: {
-    contents: function () {
-      return this.folder.folders
-        && this.folder.documents
-        ? this.folder.folders.concat(this.folder.documents)
-        : [];
-    },
     currentFolder: function () {
       return this.folderTree.length === 0
         ? this.initialFolder
@@ -64,24 +62,36 @@ export default {
     }
   },
   methods: {
-    documentDownload (doc) {
-      return 'http://localhost:1337' + doc.file[0].url;
-    },
-    documentName (doc) {
-      return doc.title + '.' + doc.file[0].url.split('.')[1]
-    },
     isLastFolder (folder) {
-      return folder === this.folderTree.slice(-1)[0];
+      return folder === this.folderTree.slice(-1)[0]
     },
-    itemClick (item) {
-      this.folderTree.push(item)
-    },
-    editTree (index) {
+    downTree (index) {
       this.folderTree = this.folderTree.slice(0, index + 1)
+    },
+    climbTree (clickedFolder) {
+      this.folderTree.push(clickedFolder)
+    },
+    addItem (item) {
+      this.contents.push(item)
+    },
+    itemDelete (item) {
+      let index = this.contents.findIndex( (x) => x === item )
+      this.contents.splice(index, 1)
+    },
+    logout () {
+      localStorage.removeItem("apollo-token")
+      localStorage.removeItem("user")
+      this.$router.push("/")
+    },
+    adminOrPartner () {
+      let user = JSON.parse(localStorage.getItem('user'))
+      return user.role && (user.role.type === 'admin' || user.role.type === 'partner')
     }
   },
   components: {
-    FolderForm
+    FolderForm,
+    UploaderForm,
+    FolderContents
   },
   apollo: {
     folder: {
@@ -102,6 +112,7 @@ export default {
             title
             file {
               url
+              ext
             }
           }
         }
@@ -110,8 +121,42 @@ export default {
         return {
           folderId: this.currentFolder
         }
+      },
+      result (result) {
+        let folder = result.data.folder
+        this.folder = folder
+        this.contents = folder.folders.concat(folder.documents)
       }
     }
   }
 }
 </script>
+<style>
+.uk-card-hover:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+.uk-card-hover:hover span, .uk-card-hover:hover .uk-icon {
+  color: #fff !important;
+}
+.uk-card-hover:hover .trash-link {
+  color: rgba(255,255,255,.5) !important;
+}
+.uk-card-hover:hover .trash-link:hover {
+  color: #fff !important;
+}
+.uk-breadcrumb {
+  margin: 0;
+}
+.uk-breadcrumb>*>* {
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  min-height: 60px;
+}
+.uk-breadcrumb>:nth-child(n+2):not(.uk-first-column)::before {
+  display: block;
+  float: left;
+  margin: 18px 0;
+}
+</style>

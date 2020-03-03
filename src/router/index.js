@@ -7,6 +7,7 @@ import Login from "@/components/Login"
 import Dash from "@/components/Dash"
 import Projects from "@/components/Projects"
 import Project from "@/components/Project"
+import Connect from "@/components/Connect"
 
 Vue.use(Router)
 
@@ -45,13 +46,19 @@ let router = new Router({
       path: "/projects/:project_id",
       name: "project",
       component: Project
-    },{
+    },
+    {
       path: "/dash*",
       name: "dash",
       component: Dash,
       meta: {
         requires_auth: true
       }
+    },
+    {
+      path: "/connect",
+      name: "connect",
+      component: Connect
     }
   ],
     scrollBehavior() {

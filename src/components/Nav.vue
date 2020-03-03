@@ -18,9 +18,12 @@
           <li v-bind:class="isActive('projects')">
             <router-link to="/projects">Projects</router-link>
           </li>
+          <li v-bind:class="isActive('connect')">
+            <router-link to="/connect">Connect</router-link>
+          </li>
         </ul>
         <div class="uk-navbar-item uk-visible@m">
-          <router-link to="/dash" class="uk-button uk-button-default members-button">Members</router-link>
+          <router-link to="/dash" class="uk-button uk-button-default members-button">Knowledge Area</router-link>
         </div>
         <a class="uk-navbar-toggle uk-hidden@m" uk-navbar-toggle-icon href="#offcanvas" uk-toggle></a>
       </div>
@@ -39,8 +42,11 @@
               <li v-bind:class="isActive('projects')">
                 <router-link class="uk-offcanvas-close" to="/projects">Projects</router-link>
               </li>
-              <li v-bind:class="isActive('dash')">
-                <router-link class="uk-offcanvas-close" to="/dash">Dash</router-link>
+              <li v-bind:class="isActive('connect')">
+                <router-link class="uk-offcanvas-close" to="/connect">Connect</router-link>
+              </li>
+            <li v-bind:class="isActive('dash')">
+                <router-link class="uk-offcanvas-close" to="/dash">Knowledge Area</router-link>
               </li>
             </ul>
         </div>
@@ -96,7 +102,6 @@ export default {
   .uk-navbar-nav>li>a {
     letter-spacing: 1.5px;
     border-bottom: 5px solid transparent;
-    padding-bottom: 5px;
     transition: border-color .3s;
   }
   .uk-navbar-nav>li>a, .uk-logo, .uk-navbar-toggle {

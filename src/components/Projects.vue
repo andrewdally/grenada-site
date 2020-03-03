@@ -31,7 +31,7 @@ export default {
         return project.cover &&  project.cover.url
       },
       proposalLink (project) {
-        return project.proposal ? 'http://localhost:1337' + project.proposal.url : ''
+        return project.proposal ? project.proposal.url : ''
       },
       // Refactor into util function. See Home.vue
       firstSentences (project) {

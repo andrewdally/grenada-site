@@ -38,36 +38,35 @@ export default {
     return {
       email: "",
       password: ""
-    };
+    }
   },
   methods: {
     handleSubmit(e) {
-      e.preventDefault();
+      e.preventDefault()
       if (this.password.length > 0) {
         this.$http
-          .post("http://localhost:1337/auth/local", {
+          .post(process.env.VUE_APP_STRAPI_CMS_HTTP + "auth/local", {
             identifier: this.email,
             password: this.password
           })
           .then(response => {
-            localStorage.setItem("user", JSON.stringify(response.data.user));
-            localStorage.setItem("apollo-token", response.data.jwt);
-            //onLogin
+            localStorage.setItem("user", JSON.stringify(response.data.user))
+            localStorage.setItem("apollo-token", response.data.jwt)
 
-            if (localStorage.getItem("jwt") != null) {
-              this.$emit("loggedIn");
+            if (localStorage.getItem("apollo-token") != null) {
+              this.$emit("loggedIn")
               if (this.$route.params.nextUrl != null) {
-                this.$router.push(this.$route.params.nextUrl);
+                this.$router.push(this.$route.params.nextUrl)
               } else {
-                this.$router.push("dash");
+                this.$router.push("dash")
               }
             }
           })
           .catch(function(error) {
-            console.log(error.response);
-          });
+            console.log(error.response)
+          })
       }
     }
   }
-};
+}
 </script>

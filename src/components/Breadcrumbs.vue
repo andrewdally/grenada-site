@@ -27,7 +27,7 @@ export default {
   props: ['folderTree'],
   methods: {
     isLastFolder (folder) {
-      return folder === this.folderTree.slice(-1)[0];
+      return folder === this.folderTree.slice(-1)[0]
     }
   }
 }

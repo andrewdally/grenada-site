@@ -20,13 +20,10 @@
       <div>
         <ul class="uk-nav uk-light">
           <li>
-            <router-link to="dash">Members</router-link>
+            <router-link to="dash">Knowledge Area</router-link>
           </li>
           <li>
-            <router-link to="about">Contact</router-link>
-          </li>
-          <li>
-            <router-link to="about">News</router-link>
+            <router-link to="connect">Connect</router-link>
           </li>
         </ul>
       </div>
