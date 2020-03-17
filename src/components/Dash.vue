@@ -25,6 +25,7 @@
           :contents="contents"
           @folder-click="climbTree"
           @item-delete="itemDelete"
+          @folder-share="shareFolder"
         />
         <template v-if="adminOrPartner()">
           <p uk-margin>
@@ -33,6 +34,7 @@
           </p>
           <folder-form @add-folder="addItem" v-bind:parentFolder="currentFolder"/>
           <uploader-form @add-document="addItem" v-bind:parentFolder="currentFolder"/>
+          <share-form v-if="sharingFolder"  @share-complete="shareComplete" v-bind:folder="sharingFolder" :key="sharingId"/>
         </template>
       </div>
     </div>
@@ -41,9 +43,11 @@
 
 <script>
 import gql from 'graphql-tag'
+import axios from 'axios'
 import FolderContents from './FolderContents'
 import FolderForm from './FolderForm'
 import UploaderForm from './UploaderForm'
+import ShareForm from './ShareForm'
 
 export default {
   data () {
@@ -51,7 +55,9 @@ export default {
       folder: {},
       initialFolder: 1,
       folderTree: [],
-      contents: []
+      contents: [],
+      sharingId: 0,
+      sharingFolder: null
     }
   },
   computed: {
@@ -59,6 +65,14 @@ export default {
       return this.folderTree.length === 0
         ? this.initialFolder
         : this.folderTree.slice(-1)[0].id
+    }
+  },
+  mounted: function() {
+    // this.fetchFolder()
+  },
+  watch: {
+    currentFolder: function () {
+      // this.fetchFolder()
     }
   },
   methods: {
@@ -78,6 +92,14 @@ export default {
       let index = this.contents.findIndex( (x) => x === item )
       this.contents.splice(index, 1)
     },
+    shareFolder: async function (folder) {
+      this.sharingFolder = folder
+      await this.$nextTick()
+      window.UIkit.modal('#share-modal').show()
+    },
+    shareComplete (folder) {
+      console.log(folder)
+    },
     logout () {
       localStorage.removeItem("apollo-token")
       localStorage.removeItem("user")
@@ -86,12 +108,24 @@ export default {
     adminOrPartner () {
       let user = JSON.parse(localStorage.getItem('user'))
       return user.role && (user.role.type === 'admin' || user.role.type === 'partner')
+    },
+    fetchFolder () {
+      axios.get(process.env.VUE_APP_STRAPI_CMS_HTTP + 'folders/filtered/' + this.currentFolder ,
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('apollo-token')
+        }
+      })
+      .then( response => {
+        console.log('response', response)
+      })
     }
   },
   components: {
     FolderForm,
     UploaderForm,
-    FolderContents
+    FolderContents,
+    ShareForm
   },
   apollo: {
     folder: {
@@ -106,6 +140,10 @@ export default {
           folders {
             id
             title
+            users {
+              id
+              email
+            }
           }
           documents {
             id
@@ -139,10 +177,10 @@ export default {
 .uk-card-hover:hover span, .uk-card-hover:hover .uk-icon {
   color: #fff !important;
 }
-.uk-card-hover:hover .trash-link {
+.uk-card-hover:hover .action-link {
   color: rgba(255,255,255,.5) !important;
 }
-.uk-card-hover:hover .trash-link:hover {
+.uk-card-hover:hover .action-link:hover {
   color: #fff !important;
 }
 .uk-breadcrumb {

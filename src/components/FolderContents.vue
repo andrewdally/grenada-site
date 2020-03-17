@@ -8,7 +8,7 @@
         <document-card :document="item" @item-delete="itemDelete"/>
       </a>
       <div v-else @click="folderClick(item)" :class="itemCardClass()">
-        <folder-card :folder="item" />
+        <folder-card :folder="item" @folder-share="folderShare"/>
       </div>
     </div>
   </div>
@@ -29,6 +29,9 @@ export default {
     },
     itemDelete (item) {
       this.$emit('item-delete', item)
+    },
+    folderShare (item) {
+      this.$emit('folder-share', item)
     }
   },
   computed: {

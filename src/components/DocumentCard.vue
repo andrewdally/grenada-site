@@ -6,7 +6,7 @@
         <span class="uk-margin-small-left">{{document.title}}</span>
       </div>
       <div class="uk-navbar-right">
-        <a @click="deleteDocument($event)" class="uk-icon-link trash-link" uk-icon="trash"></a>
+        <a @click="deleteDocument($event)" class="uk-icon-link action-link" uk-icon="trash"></a>
       </div>
     </div>
   </transition>

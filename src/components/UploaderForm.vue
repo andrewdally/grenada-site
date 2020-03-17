@@ -103,7 +103,6 @@ export default {
         }
       )
       .then(function (response) {
-
         attachDocument(response.data[0])
       })
       .catch(function (response) {

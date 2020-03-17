@@ -5,7 +5,7 @@
       <span class="uk-margin-small-left">{{folder.title}}</span>
     </div>
     <div class="uk-navbar-right">
-      <a @click="deleteFolder($event)" class="uk-icon-link trash-link" uk-icon="forward"></a>
+      <a @click="shareFolder($event)" class="uk-icon-link action-link" uk-icon="forward"></a>
     </div>
   </div>
 </template>
@@ -14,8 +14,9 @@
 export default {
   props: ['folder'],
   methods: {
-    deleteFolder (event) {
+    shareFolder (event) {
       event.stopPropagation()
+      this.$emit('folder-share', this.folder)
     }
   }
 }
