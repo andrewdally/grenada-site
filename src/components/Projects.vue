@@ -16,7 +16,6 @@
 <script>
 import gql from 'graphql-tag'
 import ProjectCard from '@/components/ProjectCard'
-import {filteredItems} from '@/utils'
 export default {
   data: function () {
     return {
@@ -26,30 +25,13 @@ export default {
   components: {
     ProjectCard
   },
-  methods: {
-      imageUrl (project) {
-        return project.cover &&  project.cover.url
-      },
-      proposalLink (project) {
-        return project.proposal ? project.proposal.url : ''
-      },
-      // Refactor into util function. See Home.vue
-      firstSentences (project) {
-        let sentences = project.body.split('. ')
-        let firstTwo = sentences.slice(0, 2)
-        return firstTwo.join('. ')
-      },
-      asColumn (list, column, columns) {
-        return filteredItems(list, column, columns)
-      }
-  },
   apollo: {
     projects: gql`query {
       projects {
         id
         title
         body
-        proposal {
+        concept {
           url
         }
         cover {

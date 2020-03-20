@@ -5,6 +5,10 @@
       <div class="uk-margin-auto" style="max-width: 640px;">
         <img class="uk-margin-bottom" v-bind:src="imageUrl(project)" alt="">
         <vue-markdown :source="source"></vue-markdown>
+        <a v-if="project.concept" class="uk-button uk-button-secondary" :href="project.concept.url" target="_blank">
+          <span class="uk-margin-small-right" uk-icon="icon: download" />
+          Download concept note
+        </a>
       </div>
     </section>
   </div>
@@ -42,6 +46,9 @@ export default {
           cover {
             url
           }
+          concept {
+            url
+          }
           members {
             id
             name
@@ -54,9 +61,9 @@ export default {
         }
       },
       result(result) {
-        console.log('source', this.source)
         this.project = result.data.project
         this.source = result.data.project.body
+        console.log('project', this.project)
       }
     }
   }

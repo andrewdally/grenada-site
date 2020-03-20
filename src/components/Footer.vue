@@ -2,7 +2,15 @@
   <div id="footer" class="uk-section-small">
     <div class="uk-container uk-flex uk-child-width-1-3@s">
       <div>
-        <span class="copyright">©2020 CGSGRENADA</span>
+        <div class="copyright">©2020 CGSGRENADA</div>
+        <div class="uk-margin-small-top" style="position:relative;">
+          <img
+            style="height: 50px; width: 50px; top: 0; left: 0;"
+            :src="require('@/assets/gcf-logo-globe.png')" />
+          <img
+            style="position: absolute; height:34px; top: 30px; left: 53px;"
+            :src="require('@/assets/gcf-logo-type-wh.png')" />
+        </div>
       </div>
       <div>
         <ul class="uk-nav uk-light">

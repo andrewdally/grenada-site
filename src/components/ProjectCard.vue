@@ -9,9 +9,14 @@
         <h3>{{project.title}}</h3>
       </div>
     </a>
-    <div v-if="$route.name == 'projects'" class="uk-flex">
-      <a class="uk-text-small uk-text-secondary" :href="'/projects/' + project.id">[Read more]</a>
-      <a v-if="project.proposal" class="uk-text-small uk-text-secondary pdf-link" :href="project.proposal.url" target="_blank">[Download PDF]</a>
+    <div v-if="$route.name == 'projects'" class="uk-margin-small-top">
+      <a class="uk-button uk-button-secondary uk-button-small" :href="'/projects/' + project.id">
+        Read more
+      </a>
+      <a v-if="project.concept" class="uk-button uk-button-secondary uk-button-small uk-margin-small-left" :href="project.concept.url" target="_blank">
+        Concept Note
+        <span uk-icon="icon: download; ratio: 0.75;"/>
+      </a>
     </div>
     <div class="uk-margin-small-top" v-else>
       <p class="description uk-width-3-4@s uk-margin-auto@s uk-text-center@s">
