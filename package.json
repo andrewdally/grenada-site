@@ -15,7 +15,7 @@
     "vue-markdown": "^2.2.4",
     "vue-router": "^3.1.5",
     "vue-simple-uploader": "^0.7.4",
-    "vue-tweet-embed": "^2.4.0"
+    "vue-twitter": "^0.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",

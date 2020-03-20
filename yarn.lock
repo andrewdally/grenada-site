@@ -10057,6 +10057,11 @@ vue-router@^3.1.5:
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.1.5.tgz#ff29b8a1e1306c526b52d4dc0532109f16c41231"
   integrity sha512-BszkPvhl7I9h334GjckCh7sVFyjTPMMJFJ4Bsrem/Ik+B/9gt5tgrk8k4gGLO4ZpdvciVdg7O41gW4DisQWurg==
 
+vue-script2@^2.0.3:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/vue-script2/-/vue-script2-2.1.0.tgz#8e480dc6052c8cdf2aa0ec112efc80f31ddc3522"
+  integrity sha512-EDUOjQBFvhkJXwmWuUR9ijlF7/4JtmvjXSKaHSa/LNTMy9ltjgKgYB68aqlxgq8ORdSxowd5eo24P1syjZJnBA==
+
 vue-simple-uploader@^0.7.4:
   version "0.7.4"
   resolved "https://registry.yarnpkg.com/vue-simple-uploader/-/vue-simple-uploader-0.7.4.tgz#8cf6033fdae05b39f898146cc961213a38606259"
@@ -10085,10 +10090,12 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
-vue-tweet-embed@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/vue-tweet-embed/-/vue-tweet-embed-2.4.0.tgz#8707efd49b519fd2201200ea1ba68881c35d886d"
-  integrity sha512-bjViatv0priR1dTEPJpRyWigWGUTUC28VT/sWTaZE+RBWuj/XZvOU5Hzk+O8Mue2dBCAHJrRpoO1VKlcgmHohg==
+vue-twitter@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/vue-twitter/-/vue-twitter-0.1.0.tgz#57f408753f6aa0fe0772bda78c986c8b0975e258"
+  integrity sha512-qBHVaOjIX25rleBwHfNPsFpN6frxoz+cZNxXOyVRD20AdldpHhaXc3oKo7XNl6DBa5AkJl1jnU+rn3rKjfBm+A==
+  dependencies:
+    vue-script2 "^2.0.3"
 
 vue@^2.6.10:
   version "2.6.11"

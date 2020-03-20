@@ -8,8 +8,12 @@
           <contact-form />
         </div>
         <div class="uk-width-1-3@s">
-          Follow us on twitter.
-          <tweets />
+          <twitter>
+            <a
+              class="twitter-timeline"
+              data-tweet-limit="4"
+              href="https://twitter.com/NYUMarron?ref_src=twsrc%5Etfw">Tweets by NYUMarron</a>
+          </twitter>
         </div>
       </div>
     </div>
@@ -17,11 +21,11 @@
 </template>
 <script>
 import ContactForm from "./ContactForm"
-import Tweets from "./Tweets"
+import { twitter } from 'vue-twitter'
 export default {
   components: {
     ContactForm,
-    Tweets
+    twitter
   }
 }
 </script>
