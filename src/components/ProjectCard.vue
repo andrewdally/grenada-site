@@ -5,25 +5,16 @@
       v-bind:data-src="coverImage(project)"
       v-bind:href="'/projects/' + project.id"
       uk-img>
-      <div class="overlay uk-flex uk-flex-middle">
-        <h3>{{project.title}}</h3>
+      <div class="overlay uk-flex uk-text-center uk-flex-middle">
+        <h3 class="uk-margin-auto">{{project.title}}</h3>
       </div>
     </a>
     <div v-if="$route.name == 'projects'" class="uk-margin-small-top">
-      <a class="uk-button uk-button-secondary uk-button-small" :href="'/projects/' + project.id">
-        Read more
-      </a>
-      <a v-if="project.concept" class="uk-button uk-button-secondary uk-button-small uk-margin-small-left" :href="project.concept.url" target="_blank">
-        Concept Note
+      <a v-if="project.concept" class="uk-button uk-button-text uk-button-small" :href="project.concept.url" target="_blank">
+        Project Summary
         <span uk-icon="icon: download; ratio: 0.75;"/>
       </a>
     </div>
-    <div class="uk-margin-small-top" v-else>
-      <p class="description uk-width-3-4@s uk-margin-auto@s uk-text-center@s">
-        {{snippet(project)}}
-      </p>
-    </div>
-
   </div>
 </template>
 
@@ -33,15 +24,8 @@ export default {
   props: ['project'],
   methods: {
     coverImage (object) {
-      console.log(object)
       return object.cover && object.cover.url
     },
-    snippet (object) {
-      let snippet = object.body.substring(0, 200)
-      let words = snippet.split(' ')
-      words.pop()
-      return words.join(' ') + '...'
-    }
   },
 }
 </script>

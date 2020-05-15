@@ -2,7 +2,7 @@
   <div class="uk-container">
     <section class="uk-section">
       <h2>Projects</h2>
-      <div class="uk-grid uk-child-width-1-2@s uk-child-width-1-3@m">
+      <div class="uk-grid uk-child-width-1-2@s">
         <project-card v-for="project in projects"
           class="project-collection"
           v-bind:key="project.id"

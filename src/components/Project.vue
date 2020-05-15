@@ -6,8 +6,8 @@
         <img class="uk-margin-bottom" v-bind:src="imageUrl(project)" alt="">
         <vue-markdown :source="source"></vue-markdown>
         <a v-if="project.concept" class="uk-button uk-button-secondary" :href="project.concept.url" target="_blank">
+          Project Summary
           <span class="uk-margin-small-right" uk-icon="icon: download" />
-          Download concept note
         </a>
       </div>
     </section>
