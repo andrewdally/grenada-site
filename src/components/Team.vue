@@ -43,7 +43,6 @@ export default {
           name
           title
           description
-          team
           photo {
             url
           }
