@@ -63,7 +63,6 @@ export default {
       result(result) {
         this.project = result.data.project
         this.source = result.data.project.body
-        console.log('project', this.project)
       }
     }
   }

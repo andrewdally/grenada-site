@@ -27,7 +27,7 @@ export default {
   },
   apollo: {
     projects: gql`query {
-      projects {
+      projects (sort: "sort_order") {
         id
         title
         body

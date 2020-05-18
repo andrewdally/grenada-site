@@ -64,7 +64,7 @@ export default {
   apollo: {
     projects: {
       query: gql`{
-        projects(limit: 3) {
+        projects(sort: "sort_order", limit: 3) {
           id
           title
           body
