@@ -1,20 +1,10 @@
 <template>
   <div class="uk-container">
-    <section class="uk-section">
-      <h2 class="uk-text-center uk-text-uppercase">International Team</h2>
+    <section class="uk-section" v-for="team in teams" v-bind:key="team.id">
+      <h2 class="uk-text-center uk-text-uppercase">{{team.title}}</h2>
       <div class="uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid>
         <team-member
-          v-for="member in internationalTeam"
-          v-bind:key="member.id"
-          v-bind:member="member"
-        />
-      </div>
-    </section>
-    <section class="uk-section" scrollspy="cls: uk-animation-fade; target: .uk-card; delay: 200;">
-      <h2 class="uk-text-center uk-text-uppercase">Grenada Team</h2>
-      <div class="uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid>
-        <team-member
-          v-for="member in grenadaTeam"
+          v-for="member in sortedMembers(team.members)"
           v-bind:key="member.id"
           v-bind:member="member"
         />
@@ -28,29 +18,35 @@ import gql from 'graphql-tag'
 import TeamMember from './TeamMember'
 
 export default {
-  data: function () {
-    return {
-      members: []
-    }
-  },
-  computed: {
-    internationalTeam: function () {
-      return this.members.filter(member => member.team === 'International')
+  methods: {
+    sortedMembers(members) {
+      return members.slice().sort(this.memberNameCompare)
     },
-    grenadaTeam: function () {
-      return this.members.filter(member => member.team === 'Grenada')
+    memberNameCompare(a, b) {
+      let splitA = a.name.split(" ")
+      let splitB = b.name.split(" ")
+      let lastA = splitA[splitA.length - 1]
+      let lastB = splitB[splitB.length - 1]
+
+      if (lastA < lastB) return -1;
+      if (lastA > lastB) return 1;
+      return 0;
     }
   },
   apollo: {
-    members: gql`query {
-      members (sort: "id") {
+    teams: gql`query {
+      teams (sort: "sort_order") {
         id
-        name
         title
-        description
-        team
-        photo {
-          url
+        members {
+          id
+          name
+          title
+          description
+          team
+          photo {
+            url
+          }
         }
       }
     }`
